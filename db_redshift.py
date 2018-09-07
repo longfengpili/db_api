@@ -12,7 +12,7 @@ from pandas import DataFrame
 import logging
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d行 - %(message)s"
-logging.basicConfig(filename='my.log', level=logging.DEBUG, format=LOG_FORMAT)
+logging.basicConfig(filename='my.log', level=logging.WARNING, format=LOG_FORMAT)
 console = logging.StreamHandler(sys.stderr)
 console.setLevel(logging.ERROR)
 console.setFormatter(logging.Formatter(LOG_FORMAT))
@@ -78,7 +78,6 @@ class db_redshift():
     
     def multiple_sql_execute(self,sql,k=None,**kw):
         sql_for_redshift_list = self.__find_sql_for_red(sql)
-        # print(sql_for_redshift_list)
         df_dict = {}
         if k is None:
             k = []
@@ -89,9 +88,7 @@ class db_redshift():
             for i,sql in enumerate(sql_for_redshift_list):
                 for j in k:
                     if i == j - 1:
-                        # print(i,sql)
                         change_sql = self.change_sql(sql,**kw)
-                        # print(i,change_sql)
                         df = self.result_df(change_sql)
                         # rows,_ = self.redshift_execute(change_sql)
                         df_dict[i] = df
@@ -109,5 +106,5 @@ if __name__ == '__main__':
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
     df = redshift.multiple_sql_execute(sql,k=[1],temp_user_info_t='temp_user_info')
-    print(df[0][1])
-    print(df[1][1])
+    print(df[0])
+    print(df[1])

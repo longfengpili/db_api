@@ -3,8 +3,6 @@
 
 from google.cloud.bigquery import dbapi
 from google.cloud import bigquery
-
-
 from datetime import date,timedelta,datetime
 import re
 import sys
@@ -14,7 +12,7 @@ from pandas import DataFrame
 import logging
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d行 - %(message)s"
-logging.basicConfig(filename='my.log', level=logging.ERROR, format=LOG_FORMAT)
+logging.basicConfig(filename='my.log', level=logging.WARNING, format=LOG_FORMAT)
 console = logging.StreamHandler(sys.stderr)
 console.setLevel(logging.ERROR)
 console.setFormatter(logging.Formatter(LOG_FORMAT))
@@ -37,7 +35,6 @@ class db_firebase():
     def __find_sql_for_fire(self,sql):
         sql_for_firebase_list = []
         sql_for_firebase_list_temp = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
-        # print(sql_for_firebase_list_temp)
         for sql in sql_for_firebase_list_temp:
             for i in sql.split(';'):
                 if i.strip() == '':
@@ -86,6 +83,7 @@ class db_firebase():
             dataset_id,table_id = tablename.split('.',2)
             table_ref = self.__client().dataset(dataset_id).table(table_id)
             self.__client().delete_table(table_ref)
+            logging.warning('{}已删除'.format(tablename))
         except Exception as e:
             logging.error(e)
 
@@ -117,5 +115,5 @@ if __name__ == '__main__':
         sql = f.read()
 
     df_dict = firebase.multiple_sql_execute(sql)
-    print(df_dict[0][1])
-    print(df_dict[1][1])
+    print(df_dict[0])
+    print(df_dict[1])
