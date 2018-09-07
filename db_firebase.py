@@ -34,6 +34,19 @@ class db_firebase():
         firebase_connection = dbapi.connect(self.__client())
         return firebase_connection
 
+    def __find_sql_for_fire(self,sql):
+        sql_for_firebase_list = []
+        sql_for_firebase_list_temp = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
+        # print(sql_for_firebase_list_temp)
+        for sql in sql_for_firebase_list_temp:
+            for i in sql.split(';'):
+                if i.strip() == '':
+                    pass
+                else:
+                    sql_for_firebase_list.append('{}'.format(i.strip()))
+        
+        return sql_for_firebase_list
+
     def change_sql(self,sql,**kw):
         dict = {}
         for k,v in kw.items():
@@ -55,7 +68,7 @@ class db_firebase():
             conn.commit()
         except Exception as e:
             logging.error(e)
-            logging.debug(change_sql)
+            logging.error(change_sql)
             result = e
         conn.close()
  
@@ -64,48 +77,36 @@ class db_firebase():
     def result_df(self,change_sql):
         try:
             df = pd.read_sql(sql=change_sql,con=self.__firebase_connect())
-        except:
-            logging.debug(change_sql)
-            pass
-            # logging.error(e)
+        except Exception as e:
+            logging.error(e)
         return df
 
     def __drop_table(self,tablename):
-        dataset_id,table_id = tablename.split('.',2)
-        table_ref = self.__client().dataset(dataset_id).table(table_id)
-        self.__client().delete_table(table_ref)
-
-    def __find_sql_for_fire(self,sql):
-        sql_for_firebase_list = []
-        sql_for_firebase_list_temp = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
-        # print(sql_for_firebase_list_temp)
-        for sql in sql_for_firebase_list_temp:
-            for i in sql.split(';'):
-                if i.strip() == '':
-                    pass
-                else:
-                    sql_for_firebase_list.append('{}'.format(i.strip()))
-        
-        return sql_for_firebase_list
+        try:
+            dataset_id,table_id = tablename.split('.',2)
+            table_ref = self.__client().dataset(dataset_id).table(table_id)
+            self.__client().delete_table(table_ref)
+        except Exception as e:
+            logging.error(e)
 
     def multiple_sql_execute(self,sql,**kw):
         df_dict = {}
         sql_for_firebase_list = self.__find_sql_for_fire(sql)
         j = 0
-        for i,sql in enumerate(sql_for_firebase_list):
+        for sql in sql_for_firebase_list:
+            change_sql = self.change_sql(sql,**kw)
             try:
                 tablename = re.findall('create table (.*?) as',sql)[0]
+            except:
+                tablename = None
+
+            if tablename:
                 self.__drop_table(tablename)
-            except:
-                pass
-            change_sql = self.change_sql(sql,**kw)
-            rows,_ = self.firebase_execute(change_sql)
-            try:
+                self.firebase_execute(change_sql)
+            else:
                 df = self.result_df(change_sql)
-                df_dict[j] = [rows,df] 
+                df_dict[j] = df
                 j += 1
-            except:
-                pass
             
         return df_dict
 

@@ -93,14 +93,14 @@ class db_redshift():
                         change_sql = self.change_sql(sql,**kw)
                         # print(i,change_sql)
                         df = self.result_df(change_sql)
-                        rows,_ = self.redshift_execute(change_sql)
-                        df_dict[i] = [rows,df]
+                        # rows,_ = self.redshift_execute(change_sql)
+                        df_dict[i] = df
         else:
             for i,sql in enumerate(sql_for_redshift_list):
                 change_sql = self.change_sql(sql,**kw)
                 df = self.result_df(change_sql)
-                rows,_ = self.redshift_execute(change_sql)
-                df_dict[i] = [rows,df]
+                # rows,_ = self.redshift_execute(change_sql)
+                df_dict[i] = df
         return df_dict
 
 
