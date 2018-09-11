@@ -38,7 +38,7 @@ class db_firebase():
         elif isinstance(sql_num,int):
             find_sql_for_firebase_list = [re.findall('--#firebase(.*?)--firebase#',sql,re.S)[sql_num]]
         else:
-            raise 'sql_num must be a int!'
+            raise 'sql_num must be a int or none!'
         return find_sql_for_firebase_list
     
     def __execut_sql_for_fire(self,find_sql_for_firebase_list,k=None):
@@ -52,7 +52,7 @@ class db_firebase():
             execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][k]]]
 
         elif not isinstance(k,int):
-            raise 'k must be a int!'
+            raise 'k must be a int or none!'
         else:
             raise '请设定唯一sql，即sql_num参数必须单独传入一个数字'
         # logging.warning(execut_sql_for_firebase_list)

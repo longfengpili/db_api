@@ -39,7 +39,7 @@ class db_redshift():
         elif isinstance(sql_num,int):
             find_sql_for_redshift_list = [re.findall('--#redshift(.*?)--redshift#',sql,re.S)[sql_num]]
         else:
-            raise 'sql_num must be a int!'
+            raise 'sql_num must be a int or none!'
         return find_sql_for_redshift_list
     
     def __execut_sql_for_red(self,find_sql_for_redshift_list,k=None):
@@ -49,7 +49,7 @@ class db_redshift():
             # print(find_sql_for_redshift_list)
             execut_sql_for_redshift_list = [[i for i in find_sql_for_redshift_list[0].split(';') if i.strip()][k]]
         elif not isinstance(k,int):
-            raise 'k must be a int!'
+            raise 'k must be a int or none!'
         else:
             raise '请设定唯一sql，即sql_num参数必须单独传入一个数字'
         return execut_sql_for_redshift_list
