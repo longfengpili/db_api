@@ -27,6 +27,7 @@ select * from temp_result;
 
 --#redshift
 select * from raw_data_word.play_levels limit 11;
+select * from raw_data_word.game_starts limit 11;
 
 --redshift#
 
@@ -44,5 +45,6 @@ select * from temp.test limit 1;
 
 
 select * from temp.test limit 2;
+select * from temp.test limit 3;
 
 --firebase#

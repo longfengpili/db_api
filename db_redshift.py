@@ -27,12 +27,32 @@ class db_redshift():
         self.port = port
 
     def __redshift_connect(self):
-        redshift_connection = psycopg2.connect(database=self.database,user=self.user,password=self.password,host=self.host,port=self.port)
+        try:
+            redshift_connection = psycopg2.connect(database=self.database,user=self.user,password=self.password,host=self.host,port=self.port)
+        except Exception as e:
+            logging.error(e)
         return redshift_connection
 
-    def __find_sql_for_red(self,sql):
-        sql_for_redshift_list = re.findall('--#redshift(.*?)--redshift#',sql,re.S)
-        return sql_for_redshift_list
+    def __find_sql_for_red(self,sql,sql_num=None):
+        if sql_num == None:
+            find_sql_for_redshift_list = re.findall('--#redshift(.*?)--redshift#',sql,re.S)
+        elif isinstance(sql_num,int):
+            find_sql_for_redshift_list = [re.findall('--#redshift(.*?)--redshift#',sql,re.S)[sql_num]]
+        else:
+            raise 'sql_num must be a int!'
+        return find_sql_for_redshift_list
+    
+    def __execut_sql_for_red(self,find_sql_for_redshift_list,k=None):
+        if k == None:
+            execut_sql_for_redshift_list = find_sql_for_redshift_list
+        elif isinstance(k,int) and len(find_sql_for_redshift_list) == 1:
+            # print(find_sql_for_redshift_list)
+            execut_sql_for_redshift_list = [[i for i in find_sql_for_redshift_list[0].split(';') if i.strip()][k]]
+        elif not isinstance(k,int):
+            raise 'k must be a int!'
+        else:
+            raise '请设定唯一sql，即sql_num参数必须单独传入一个数字'
+        return execut_sql_for_redshift_list
 
     def change_sql(self,sql,**kw):
         # print(sql)
@@ -76,28 +96,17 @@ class db_redshift():
 
         return df
     
-    def multiple_sql_execute(self,sql,k=None,**kw):
-        sql_for_redshift_list = self.__find_sql_for_red(sql)
+    def multiple_sql_execute(self,sql,sql_num=None,k=None,**kw):
+        sql_for_redshift_list = self.__find_sql_for_red(sql,sql_num=sql_num)
+        execut_sql_for_redshift_list = self.__execut_sql_for_red(sql_for_redshift_list,k=k)
+        logging.error(execut_sql_for_redshift_list)
         df_dict = {}
-        if k is None:
-            k = []
-        elif not isinstance(k,list):
-            raise '[k] must be a list'            
 
-        if len(k) != 0:
-            for i,sql in enumerate(sql_for_redshift_list):
-                for j in k:
-                    if i == j - 1:
-                        change_sql = self.change_sql(sql,**kw)
-                        df = self.result_df(change_sql)
-                        # rows,_ = self.redshift_execute(change_sql)
-                        df_dict[i] = df
-        else:
-            for i,sql in enumerate(sql_for_redshift_list):
-                change_sql = self.change_sql(sql,**kw)
-                df = self.result_df(change_sql)
-                # rows,_ = self.redshift_execute(change_sql)
-                df_dict[i] = df
+        for i,sql in enumerate(execut_sql_for_redshift_list):
+            change_sql = self.change_sql(sql,**kw)
+            df = self.result_df(change_sql)
+            df_dict[i] = df
+
         return df_dict
 
 
@@ -105,6 +114,5 @@ if __name__ == '__main__':
     redshift = db_redshift(database='',user='',password='',host='',port='5439')
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
-    df = redshift.multiple_sql_execute(sql,k=[1],temp_user_info_t='temp_user_info')
+    df = redshift.multiple_sql_execute(sql,sql_num=-1,k=-1,temp_user_info_t='temp_user_info')
     print(df[0])
-    print(df[1])

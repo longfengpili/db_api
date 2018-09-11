@@ -32,17 +32,31 @@ class db_firebase():
         firebase_connection = dbapi.connect(self.__client())
         return firebase_connection
 
-    def __find_sql_for_fire(self,sql):
-        sql_for_firebase_list = []
-        sql_for_firebase_list_temp = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
-        for sql in sql_for_firebase_list_temp:
-            for i in sql.split(';'):
-                if i.strip() == '':
-                    pass
-                else:
-                    sql_for_firebase_list.append('{}'.format(i.strip()))
-        
-        return sql_for_firebase_list
+    def __find_sql_for_fire(self,sql,sql_num=None):
+        if sql_num == None:
+            find_sql_for_firebase_list = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
+        elif isinstance(sql_num,int):
+            find_sql_for_firebase_list = [re.findall('--#firebase(.*?)--firebase#',sql,re.S)[sql_num]]
+        else:
+            raise 'sql_num must be a int!'
+        return find_sql_for_firebase_list
+    
+    def __execut_sql_for_fire(self,find_sql_for_firebase_list,k=None):
+        # logging.warning(find_sql_for_firebase_list)
+        if k == None:
+            execut_sql_for_firebase_list = []
+            for sql in find_sql_for_firebase_list:
+                sql = [i for i in sql.split(';') if i.strip()]
+                execut_sql_for_firebase_list.append(sql)
+        elif isinstance(k,int) and len(find_sql_for_firebase_list) == 1:
+            execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][k]]]
+
+        elif not isinstance(k,int):
+            raise 'k must be a int!'
+        else:
+            raise '请设定唯一sql，即sql_num参数必须单独传入一个数字'
+        # logging.warning(execut_sql_for_firebase_list)
+        return execut_sql_for_firebase_list
 
     def change_sql(self,sql,**kw):
         dict = {}
@@ -75,6 +89,7 @@ class db_firebase():
         try:
             df = pd.read_sql(sql=change_sql,con=self.__firebase_connect())
         except Exception as e:
+            df = None
             logging.error(e)
         return df
 
@@ -87,11 +102,9 @@ class db_firebase():
         except Exception as e:
             logging.error(e)
 
-    def multiple_sql_execute(self,sql,**kw):
-        df_dict = {}
-        sql_for_firebase_list = self.__find_sql_for_fire(sql)
-        j = 0
-        for sql in sql_for_firebase_list:
+    def firebase_execute_sqllist(self,sqllist,**kw):
+        df = None
+        for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
             try:
                 tablename = re.findall('create table (.*?) as',sql)[0]
@@ -103,8 +116,18 @@ class db_firebase():
                 self.firebase_execute(change_sql)
             else:
                 df = self.result_df(change_sql)
-                df_dict[j] = df
-                j += 1
+        return df
+
+    def multiple_sql_execute(self,sql,sql_num=None,k=None,**kw):
+        df_dict = {}
+        sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_num=sql_num)
+        execut_sql_for_firebase_list = self.__execut_sql_for_fire(sql_for_firebase_list,k=k)
+        logging.error(execut_sql_for_firebase_list)
+        j = 0
+        for sqllist in execut_sql_for_firebase_list:
+            df = self.firebase_execute_sqllist(sqllist)
+            df_dict[j] = df
+            j += 1
             
         return df_dict
 
@@ -114,6 +137,6 @@ if __name__ == '__main__':
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
 
-    df_dict = firebase.multiple_sql_execute(sql)
+    df_dict = firebase.multiple_sql_execute(sql,sql_num=0,k=None)
     print(df_dict[0])
-    print(df_dict[1])
+

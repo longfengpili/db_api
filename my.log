@@ -1,0 +1,299 @@
+2018-09-11 11:40:48,347 - ERROR - db_redshift.py - 91行 - could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5439?
+could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5439?
+
+2018-09-11 11:40:50,375 - ERROR - db_redshift.py - 91行 - could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (::1) and accepting
+	TCP/IP connections on port 5439?
+could not connect to server: Connection refused (0x0000274D/10061)
+	Is the server running on host "localhost" (127.0.0.1) and accepting
+	TCP/IP connections on port 5439?
+
+2018-09-11 11:48:44,116 - ERROR - db_redshift.py - 94行 - Execution failed on sql '
+
+': can't execute an empty query
+2018-09-11 11:50:11,086 - ERROR - db_redshift.py - 94行 - Execution failed on sql '
+
+': can't execute an empty query
+2018-09-11 11:50:42,356 - ERROR - db_redshift.py - 95行 - Execution failed on sql '
+
+': can't execute an empty query
+2018-09-11 11:51:45,767 - ERROR - db_redshift.py - 95行 - Execution failed on sql '
+
+select * from temp_result': relation "temp_result" does not exist
+
+2018-09-11 12:01:23,080 - ERROR - db_firebase.py - 109行 - 404 DELETE https://www.googleapis.com/bigquery/v2/projects/word-view/datasets/temp/tables/test: Not found: Table word-view:temp.test
+2018-09-11 12:01:24,441 - ERROR - db_firebase.py - 88行 - [{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected extra token SELECT at [6:1]'}]
+2018-09-11 12:01:24,442 - ERROR - db_firebase.py - 89行 - 
+create table temp.test as
+select * from fact_wordview.new_users_info limit 10;
+
+
+select * from temp.test limit 1;
+
+
+2018-09-11 12:01:25,665 - ERROR - db_firebase.py - 99行 - Execution failed on sql: 
+
+
+
+select * from temp.test limit 2;
+
+
+[{'reason': 'notFound', 'message': 'Not found: Table word-view:temp.test was not found in location US'}]
+unable to rollback
+2018-09-11 12:31:43,606 - ERROR - db_firebase.py - 99行 - Execution failed on sql: 
+
+
+
+select * from temp.test limit 2;
+
+
+[{'reason': 'notFound', 'message': 'Not found: Table word-view:temp.test was not found in location US'}]
+unable to rollback
+2018-09-11 12:32:23,953 - ERROR - db_firebase.py - 109行 - 404 DELETE https://www.googleapis.com/bigquery/v2/projects/word-view/datasets/temp/tables/test: Not found: Table word-view:temp.test
+2018-09-11 12:32:25,037 - ERROR - db_firebase.py - 88行 - [{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected extra token SELECT at [6:1]'}]
+2018-09-11 12:32:25,038 - ERROR - db_firebase.py - 89行 - 
+create table temp.test as
+select * from fact_wordview.new_users_info limit 10;
+
+
+select * from temp.test limit 1;
+
+
+2018-09-11 12:34:57,239 - ERROR - db_firebase.py - 102行 - Execution failed on sql: []
+400 POST https://www.googleapis.com/bigquery/v2/projects/word-view/jobs: Required parameter is missing
+unable to rollback
+2018-09-11 12:35:37,384 - ERROR - db_firebase.py - 103行 - Execution failed on sql: []
+400 POST https://www.googleapis.com/bigquery/v2/projects/word-view/jobs: Required parameter is missing
+unable to rollback
+2018-09-11 12:36:54,111 - ERROR - db_firebase.py - 104行 - Execution failed on sql: []
+400 POST https://www.googleapis.com/bigquery/v2/projects/word-view/jobs: Required parameter is missing
+unable to rollback
+2018-09-11 12:40:03,248 - ERROR - db_firebase.py - 104行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:40:52,647 - ERROR - db_firebase.py - 103行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:41:45,846 - ERROR - db_firebase.py - 103行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:42:54,654 - ERROR - db_firebase.py - 57行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10;\n\n\nselect * from temp.test limit 1;\n\n']
+2018-09-11 12:42:54,655 - ERROR - db_firebase.py - 122行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:42:56,006 - ERROR - db_firebase.py - 103行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:43:39,610 - ERROR - db_firebase.py - 118行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 12:43:39,610 - ERROR - db_firebase.py - 122行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:43:41,066 - ERROR - db_firebase.py - 102行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:45:53,162 - ERROR - db_firebase.py - 119行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 12:45:53,162 - ERROR - db_firebase.py - 123行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:45:54,462 - ERROR - db_firebase.py - 103行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:47:03,301 - ERROR - db_firebase.py - 57行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10;\n\n\nselect * from temp.test limit 1;\n\n']
+2018-09-11 12:47:03,301 - ERROR - db_firebase.py - 120行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 12:47:03,302 - ERROR - db_firebase.py - 124行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:47:04,717 - ERROR - db_firebase.py - 104行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:47:27,890 - ERROR - db_firebase.py - 57行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10;\n\n\nselect * from temp.test limit 1;\n\n']
+2018-09-11 12:47:27,890 - ERROR - db_firebase.py - 70行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 12:47:27,891 - ERROR - db_firebase.py - 120行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 12:47:27,891 - ERROR - db_firebase.py - 124行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:47:29,258 - ERROR - db_firebase.py - 104行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:49:18,596 - ERROR - db_firebase.py - 57行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10;\n\n\nselect * from temp.test limit 1;\n\n', '\n\n\n\nselect * from temp.test limit 2;\n\n']
+2018-09-11 12:49:18,596 - ERROR - db_firebase.py - 70行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1'], ['\n\n\n\nselect * from temp.test limit 2']]
+2018-09-11 12:49:18,597 - ERROR - db_firebase.py - 120行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1'], ['\n\n\n\nselect * from temp.test limit 2']]
+2018-09-11 12:49:18,598 - ERROR - db_firebase.py - 124行 - ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+2018-09-11 12:49:20,050 - ERROR - db_firebase.py - 104行 - Execution failed on sql: ['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']
+None
+unable to rollback
+2018-09-11 12:54:58,959 - ERROR - db_firebase.py - 125行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1'], ['\n\n\n\nselect * from temp.test limit 2']]
+2018-09-11 12:55:24,480 - ERROR - db_firebase.py - 125行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1'], ['\n\n\n\nselect * from temp.test limit 2']]
+2018-09-11 12:55:24,480 - ERROR - db_firebase.py - 108行 - 
+create table temp.test as
+select * from fact_wordview.new_users_info limit 10
+2018-09-11 12:55:25,416 - WARNING - db_firebase.py - 100行 - temp.test已删除
+2018-09-11 12:55:27,796 - ERROR - db_firebase.py - 108行 - 
+
+
+select * from temp.test limit 1
+2018-09-11 12:55:30,542 - ERROR - db_firebase.py - 108行 - 
+
+
+
+select * from temp.test limit 2
+2018-09-11 12:56:23,670 - ERROR - db_firebase.py - 124行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1'], ['\n\n\n\nselect * from temp.test limit 2']]
+2018-09-11 12:56:24,517 - WARNING - db_firebase.py - 100行 - temp.test已删除
+2018-09-11 12:57:08,374 - WARNING - db_firebase.py - 100行 - temp.test已删除
+2018-09-11 12:57:53,091 - WARNING - db_firebase.py - 100行 - temp.test已删除
+2018-09-11 13:00:05,244 - ERROR - db_firebase.py - 92行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:43,268 - ERROR - db_firebase.py - 93行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:44,188 - ERROR - db_firebase.py - 93行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:45,058 - ERROR - db_firebase.py - 93行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:45,981 - ERROR - db_firebase.py - 93行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:46,878 - ERROR - db_firebase.py - 93行 - Execution failed on sql: s
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "s" at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:47,796 - ERROR - db_firebase.py - 93行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:48,625 - ERROR - db_firebase.py - 93行 - Execution failed on sql: l
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "l" at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:49,534 - ERROR - db_firebase.py - 93行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:50,394 - ERROR - db_firebase.py - 93行 - Execution failed on sql: c
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "c" at [1:1]'}]
+unable to rollback
+2018-09-11 13:00:51,468 - ERROR - db_firebase.py - 93行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:04,770 - ERROR - db_firebase.py - 95行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:05,666 - ERROR - db_firebase.py - 95行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:06,639 - ERROR - db_firebase.py - 95行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:07,591 - ERROR - db_firebase.py - 95行 - Execution failed on sql: 
+
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:08,523 - ERROR - db_firebase.py - 95行 - Execution failed on sql: s
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "s" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:09,498 - ERROR - db_firebase.py - 95行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:10,873 - ERROR - db_firebase.py - 95行 - Execution failed on sql: l
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "l" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:11,848 - ERROR - db_firebase.py - 95行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:12,818 - ERROR - db_firebase.py - 95行 - Execution failed on sql: c
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "c" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:13,748 - ERROR - db_firebase.py - 95行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:14,728 - ERROR - db_firebase.py - 95行 - Execution failed on sql:  
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:15,674 - ERROR - db_firebase.py - 95行 - Execution failed on sql: *
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected "*" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:16,497 - ERROR - db_firebase.py - 95行 - Execution failed on sql:  
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:17,474 - ERROR - db_firebase.py - 95行 - Execution failed on sql: f
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "f" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:18,409 - ERROR - db_firebase.py - 95行 - Execution failed on sql: r
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "r" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:19,355 - ERROR - db_firebase.py - 95行 - Execution failed on sql: o
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "o" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:20,306 - ERROR - db_firebase.py - 95行 - Execution failed on sql: m
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "m" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:21,214 - ERROR - db_firebase.py - 95行 - Execution failed on sql:  
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:22,504 - ERROR - db_firebase.py - 95行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:23,443 - ERROR - db_firebase.py - 95行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:24,385 - ERROR - db_firebase.py - 95行 - Execution failed on sql: m
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "m" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:25,311 - ERROR - db_firebase.py - 95行 - Execution failed on sql: p
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "p" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:26,577 - ERROR - db_firebase.py - 95行 - Execution failed on sql: .
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected "." at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:27,621 - ERROR - db_firebase.py - 95行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:28,667 - ERROR - db_firebase.py - 95行 - Execution failed on sql: e
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "e" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:29,528 - ERROR - db_firebase.py - 95行 - Execution failed on sql: s
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "s" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:30,436 - ERROR - db_firebase.py - 95行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:31,420 - ERROR - db_firebase.py - 95行 - Execution failed on sql:  
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:32,679 - ERROR - db_firebase.py - 95行 - Execution failed on sql: l
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "l" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:33,523 - ERROR - db_firebase.py - 95行 - Execution failed on sql: i
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "i" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:34,383 - ERROR - db_firebase.py - 95行 - Execution failed on sql: m
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "m" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:35,274 - ERROR - db_firebase.py - 95行 - Execution failed on sql: i
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "i" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:36,203 - ERROR - db_firebase.py - 95行 - Execution failed on sql: t
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected identifier "t" at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:37,081 - ERROR - db_firebase.py - 95行 - Execution failed on sql:  
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected end of statement at [1:1]'}]
+unable to rollback
+2018-09-11 13:02:37,951 - ERROR - db_firebase.py - 95行 - Execution failed on sql: 2
+[{'reason': 'invalidQuery', 'location': 'query', 'message': 'Syntax error: Unexpected integer literal "2" at [1:1]'}]
+unable to rollback
+2018-09-11 13:05:09,554 - ERROR - db_redshift.py - 95行 - Execution failed on sql '
+
+select * from temp_result': relation "temp_result" does not exist
+
+2018-09-11 13:05:51,485 - ERROR - db_redshift.py - 95行 - Execution failed on sql '
+
+select * from temp_result': relation "temp_result" does not exist
+
+2018-09-11 13:10:04,446 - WARNING - db_redshift.py - 55行 - ['\nselect * from raw_data_word.play_levels limit 11;\nselect * from raw_data_word.game_starts limit 11;\n\n']
+2018-09-11 13:10:44,314 - WARNING - db_redshift.py - 102行 - ['\nselect * from raw_data_word.play_levels limit 11;\nselect * from raw_data_word.game_starts limit 11;\n\n']
+2018-09-11 13:11:13,218 - ERROR - db_redshift.py - 102行 - ['\nselect * from raw_data_word.play_levels limit 11;\nselect * from raw_data_word.game_starts limit 11;\n\n']
+2018-09-11 13:11:25,822 - ERROR - db_redshift.py - 102行 - ['\nselect * from raw_data_word.game_starts limit 11']
+2018-09-11 13:13:14,780 - WARNING - db_firebase.py - 101行 - temp.test已删除
+2018-09-11 13:13:43,054 - ERROR - db_firebase.py - 125行 - [['\ncreate table temp.test as\nselect * from fact_wordview.new_users_info limit 10', '\n\n\nselect * from temp.test limit 1']]
+2018-09-11 13:13:44,140 - WARNING - db_firebase.py - 101行 - temp.test已删除
