@@ -22,29 +22,27 @@ create temp table temp_result as
 select * from $temp_user_info_t where group_id = '2-0-1' limit 1000;
 
 select * from temp_result;
-
 --redshift#
 
 --#redshift
 select * from raw_data_word.play_levels limit 11;
 select * from raw_data_word.game_starts limit 11;
-
 --redshift#
 
 --#firebase
 create table temp.test as
 select * from fact_wordview.new_users_info limit 10;
 
-
 select * from temp.test limit 1;
+--firebase#
+
+--#firebase
+select * from temp.test limit 2;
+select * from temp.test limit 3;
 
 --firebase#
 
 --#firebase
-
-
-
-select * from temp.test limit 2;
-select * from temp.test limit 3;
+--2018年9月12日
 
 --firebase#

@@ -61,7 +61,8 @@ class db_redshift():
         for k,v in kw.items():
             dict['${}'.format(k)] = v
         for i in dict.keys():
-            sql = re.sub('\{}'.format(i),dict[i],sql)
+            # logging.warning("\'{}\'".format(dict[i]))
+            sql = re.sub('\{}'.format(i),"\'{}\'".format(dict[i]),sql)
 
         return sql
 

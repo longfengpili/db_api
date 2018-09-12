@@ -65,7 +65,8 @@ class db_firebase():
         for k,v in kw.items():
             dict['${}'.format(k)] = v
         for i in dict.keys():
-            sql = re.sub('\{}'.format(i),dict[i],sql)
+            # logging.warning("\'{}\'".format(dict[i]))
+            sql = re.sub('\{}'.format(i),"\'{}\'".format(dict[i]),sql)
 
         return sql
 
@@ -123,6 +124,7 @@ class db_firebase():
     def multiple_sql_execute(self,sql,sql_zone=None,sql_position=-1,**kw):
         df_dict = {}
         sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_zone=sql_zone)
+        # logging.warning(sql_for_firebase_list)
         execut_sql_for_firebase_list = self.__execut_sql_for_fire(sql_for_firebase_list,sql_position=sql_position)
         logging.warning(execut_sql_for_firebase_list)
         j = 0
