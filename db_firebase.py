@@ -14,7 +14,7 @@ import logging
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d行 - %(message)s"
 logging.basicConfig(filename='my.log', level=logging.WARNING, format=LOG_FORMAT)
 console = logging.StreamHandler(sys.stderr)
-console.setLevel(logging.ERROR)
+console.setLevel(logging.WARNING)
 console.setFormatter(logging.Formatter(LOG_FORMAT))
 logging.getLogger('').addHandler(console)
 
@@ -32,29 +32,31 @@ class db_firebase():
         firebase_connection = dbapi.connect(self.__client())
         return firebase_connection
 
-    def __find_sql_for_fire(self,sql,sql_num=None):
-        if sql_num == None:
+    def __find_sql_for_fire(self,sql,sql_zone=None):
+        if sql_zone == None:
             find_sql_for_firebase_list = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
-        elif isinstance(sql_num,int):
-            find_sql_for_firebase_list = [re.findall('--#firebase(.*?)--firebase#',sql,re.S)[sql_num]]
+        elif isinstance(sql_zone,int):
+            find_sql_for_firebase_list = [re.findall('--#firebase(.*?)--firebase#',sql,re.S)[sql_zone]]
         else:
-            raise 'sql_num must be a int or none!'
+            raise 'sql_zone must be a int or none!'
         return find_sql_for_firebase_list
     
-    def __execut_sql_for_fire(self,find_sql_for_firebase_list,k=None):
+    def __execut_sql_for_fire(self,find_sql_for_firebase_list,sql_position=None):
         # logging.warning(find_sql_for_firebase_list)
-        if k == None:
+        if sql_position == None:
             execut_sql_for_firebase_list = []
             for sql in find_sql_for_firebase_list:
                 sql = [i for i in sql.split(';') if i.strip()]
                 execut_sql_for_firebase_list.append(sql)
-        elif isinstance(k,int) and len(find_sql_for_firebase_list) == 1:
-            execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][k]]]
+        elif isinstance(sql_position,int):
+            execut_sql_for_firebase_list = [[[sql_spilt for sql in find_sql_for_firebase_list for sql_spilt in sql.split(';') if sql_spilt.strip()][sql_position]]]
+                
+            # execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][sql_position]]]
 
-        elif not isinstance(k,int):
-            raise 'k must be a int or none!'
+        elif not isinstance(sql_position,int):
+            raise 'sql_position must be a int or none!'
         else:
-            raise '请设定唯一sql，即sql_num参数必须单独传入一个数字'
+            raise 'error'
         # logging.warning(execut_sql_for_firebase_list)
         return execut_sql_for_firebase_list
 
@@ -118,11 +120,11 @@ class db_firebase():
                 df = self.result_df(change_sql)
         return df
 
-    def multiple_sql_execute(self,sql,sql_num=None,k=None,**kw):
+    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=-1,**kw):
         df_dict = {}
-        sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_num=sql_num)
-        execut_sql_for_firebase_list = self.__execut_sql_for_fire(sql_for_firebase_list,k=k)
-        logging.error(execut_sql_for_firebase_list)
+        sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_zone=sql_zone)
+        execut_sql_for_firebase_list = self.__execut_sql_for_fire(sql_for_firebase_list,sql_position=sql_position)
+        logging.warning(execut_sql_for_firebase_list)
         j = 0
         for sqllist in execut_sql_for_firebase_list:
             df = self.firebase_execute_sqllist(sqllist)
@@ -137,6 +139,7 @@ if __name__ == '__main__':
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
 
-    df_dict = firebase.multiple_sql_execute(sql,sql_num=0,k=None)
+    df_dict = firebase.multiple_sql_execute(sql,sql_zone=None,sql_position=None)
     print(df_dict[0])
+    print(df_dict[1])
 
