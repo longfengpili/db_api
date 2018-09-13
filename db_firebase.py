@@ -113,6 +113,7 @@ class db_firebase():
         df = None
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
+            logging.info(change_sql)
             try:
                 tablename = re.findall('create table (.*?) as',sql)[0]
             except:
@@ -133,7 +134,7 @@ class db_firebase():
         # logging.warning(execut_sql_for_firebase_list)
         j = 0
         for sqllist in execut_sql_for_firebase_list:
-            logging.info(sqllist)
+            # logging.info(sqllist)
             df = self.firebase_execute_sqllist(sqllist)
             df_dict[j] = df
             j += 1
