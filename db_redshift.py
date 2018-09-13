@@ -12,7 +12,7 @@ from pandas import DataFrame
 import logging
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d行 - %(message)s"
-logging.basicConfig(filename='my.log', level=logging.WARNING, format=LOG_FORMAT)
+logging.basicConfig(filename='my.log', level=logging.INFO, format=LOG_FORMAT)
 console = logging.StreamHandler(sys.stderr)
 console.setLevel(logging.WARNING)
 console.setFormatter(logging.Formatter(LOG_FORMAT))
@@ -108,7 +108,7 @@ class db_redshift():
 
         for i,sql in enumerate(execut_sql_for_redshift_list):
             change_sql = self.change_sql(sql,**kw)
-            logging.warning(change_sql)
+            logging.info(change_sql)
             df = self.result_df(change_sql)
             df_dict[i] = df
 

@@ -12,7 +12,7 @@ from pandas import DataFrame
 import logging
 
 LOG_FORMAT = "%(asctime)s - %(levelname)s - %(filename)s - %(lineno)d行 - %(message)s"
-logging.basicConfig(filename='my.log', level=logging.WARNING, format=LOG_FORMAT)
+logging.basicConfig(filename='my.log', level=logging.INFO, format=LOG_FORMAT)
 console = logging.StreamHandler(sys.stderr)
 console.setLevel(logging.WARNING)
 console.setFormatter(logging.Formatter(LOG_FORMAT))
@@ -113,7 +113,7 @@ class db_firebase():
         df = None
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
-            logging.warning(change_sql)
+            logging.info(change_sql)
             try:
                 tablename = re.findall('create table (.*?) as',sql)[0]
             except:
