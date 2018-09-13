@@ -65,8 +65,12 @@ class db_firebase():
         for k,v in kw.items():
             dict['${}'.format(k)] = v
         for i in dict.keys():
-            # logging.warning("\'{}\'".format(dict[i]))
             sql = re.sub('\{}'.format(i),"\'{}\'".format(dict[i]),sql)
+        
+        sql = re.sub('\$.*?,','null,',sql)
+        sql = re.sub('\$.*?\)','null)',sql)
+        sql = re.sub('\$.*? ','null ',sql)
+
 
         return sql
 
@@ -109,6 +113,7 @@ class db_firebase():
         df = None
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
+            logging.warning(change_sql)
             try:
                 tablename = re.findall('create table (.*?) as',sql)[0]
             except:
