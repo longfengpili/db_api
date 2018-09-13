@@ -115,7 +115,7 @@ class db_firebase():
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
             try:
-                tablename = re.findall('create table (.*?) as',sql)[0]
+                tablename = re.findall('create table `(.*?)` as',sql)[0]
             except:
                 tablename = None
 
