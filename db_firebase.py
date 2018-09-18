@@ -126,7 +126,7 @@ class db_firebase():
                 df = self.result_df(change_sql)
         return df
 
-    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=-1,**kw):
+    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
         df_dict = {}
         sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_zone=sql_zone)
         # logging.warning(sql_for_firebase_list)

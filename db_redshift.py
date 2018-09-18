@@ -101,7 +101,7 @@ class db_redshift():
 
         return df
     
-    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=-1,**kw):
+    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
         sql_for_redshift_list = self.__find_sql_for_red(sql,sql_zone=sql_zone)
         execut_sql_for_redshift_list = self.__execut_sql_for_red(sql_for_redshift_list,sql_position=sql_position)
         df_dict = {}
