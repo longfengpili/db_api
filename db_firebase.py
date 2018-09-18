@@ -135,7 +135,7 @@ class db_firebase():
         j = 0
         for sqllist in execut_sql_for_firebase_list:
             # logging.info(sqllist)
-            df = self.firebase_execute_sqllist(sqllist)
+            df = self.firebase_execute_sqllist(sqllist,**kw)
             df_dict[j] = df
             j += 1
             
