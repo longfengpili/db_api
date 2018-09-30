@@ -42,7 +42,7 @@ class db_redshift():
         else:
             raise 'sql_zone must be a int or none!'
         
-        if len(find_sql_for_firebase_list) == 0:
+        if len(find_sql_for_redshift_list) == 0:
             find_sql_for_firebase_list = [sql]
 
         return find_sql_for_redshift_list
