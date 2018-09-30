@@ -33,12 +33,17 @@ class db_firebase():
         return firebase_connection
 
     def __find_sql_for_fire(self,sql,sql_zone=None):
+        find_sql_for_firebase_list = []
         if sql_zone == None:
             find_sql_for_firebase_list = re.findall('--#firebase(.*?)--firebase#',sql,re.S)
         elif isinstance(sql_zone,int):
             find_sql_for_firebase_list = [re.findall('--#firebase(.*?)--firebase#',sql,re.S)[sql_zone]]
         else:
             raise 'sql_zone must be a int or none!'
+        
+        if len(find_sql_for_firebase_list) == 0:
+            find_sql_for_firebase_list = [sql]
+
         return find_sql_for_firebase_list
     
     def __execut_sql_for_fire(self,find_sql_for_firebase_list,sql_position=None):

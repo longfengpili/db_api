@@ -34,12 +34,17 @@ class db_redshift():
         return redshift_connection
 
     def __find_sql_for_red(self,sql,sql_zone=None):
+        find_sql_for_redshift_list = []
         if sql_zone == None:
             find_sql_for_redshift_list = re.findall('--#redshift(.*?)--redshift#',sql,re.S)
         elif isinstance(sql_zone,int):
             find_sql_for_redshift_list = [re.findall('--#redshift(.*?)--redshift#',sql,re.S)[sql_zone]]
         else:
             raise 'sql_zone must be a int or none!'
+        
+        if len(find_sql_for_firebase_list) == 0:
+            find_sql_for_firebase_list = [sql]
+
         return find_sql_for_redshift_list
     
     def __execut_sql_for_red(self,find_sql_for_redshift_list,sql_position=None):
