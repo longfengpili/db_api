@@ -67,7 +67,10 @@ class db_redshift():
             dict['${}'.format(k)] = v
         for i in dict.keys():
             # logging.warning("\'{}\'".format(dict[i]))
-            sql = re.sub('\{}'.format(i),"\'{}\'".format(dict[i]),sql)
+            if 'str' in i:
+                sql = re.sub('\{}(?!\w)'.format(i),"{}".format(dict[i]),sql)
+            else:
+                sql = re.sub('\{}(?!\w)'.format(i),"\'{}\'".format(dict[i]),sql)
         sql = re.sub('\$.*?,','null,',sql)
         sql = re.sub('\$.*?\)','null)',sql)
         sql = re.sub('\$.*? ','null ',sql)
