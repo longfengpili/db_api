@@ -112,21 +112,21 @@ class db_redshift():
     def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
         sql_for_redshift_list = self.__find_sql_for_red(sql,sql_zone=sql_zone)
         execut_sql_for_redshift_list = self.__execut_sql_for_red(sql_for_redshift_list,sql_position=sql_position)
-        df_dict = {}
+        result_dict = {}
 
         for i,sql in enumerate(execut_sql_for_redshift_list):
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
-            df = self.result_df(change_sql)
-            df_dict[i] = df
+            _,result = self.redshift_execute(change_sql)
+            result_dict[i] = result
 
-        return df_dict
+        return result_dict
 
 
 if __name__ == '__main__':
     redshift = db_redshift(database='',user='',password='',host='',port='5439')
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
-    df = redshift.multiple_sql_execute(sql,sql_zone=-1,sql_position=-1,temp_user_info_t='temp_user_info')
-    print(df[0])
-    print(df[1])
+    result = redshift.multiple_sql_execute(sql,sql_zone=-1,sql_position=-1,temp_user_info_t='temp_user_info')
+    print(result[0])
+    print(result[1])

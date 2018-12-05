@@ -118,7 +118,7 @@ class db_firebase():
             logging.error(e)
 
     def firebase_execute_sqllist(self,sqllist,**kw):
-        df = None
+        result = None
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
@@ -131,11 +131,11 @@ class db_firebase():
                 self.__drop_table(tablename)
                 self.firebase_execute(change_sql)
             else:
-                df = self.result_df(change_sql)
-        return df
+                _,result = self.firebase_execute(change_sql)
+        return result
 
     def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
-        df_dict = {}
+        result_dict = {}
         sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_zone=sql_zone)
         # logging.warning(sql_for_firebase_list)
         execut_sql_for_firebase_list = self.__execut_sql_for_fire(sql_for_firebase_list,sql_position=sql_position)
@@ -143,11 +143,11 @@ class db_firebase():
         j = 0
         for sqllist in execut_sql_for_firebase_list:
             # logging.info(sqllist)
-            df = self.firebase_execute_sqllist(sqllist,**kw)
-            df_dict[j] = df
+            result = self.firebase_execute_sqllist(sqllist,**kw)
+            result_dict[j] = result
             j += 1
             
-        return df_dict
+        return result_dict
 
 
 if __name__ == '__main__':
@@ -155,7 +155,7 @@ if __name__ == '__main__':
     with open('./sql.sql','r',encoding='utf-8') as f:
         sql = f.read()
 
-    df_dict = firebase.multiple_sql_execute(sql,sql_zone=None,sql_position=None)
-    print(df_dict[0])
-    print(df_dict[1])
+    result_dict = firebase.multiple_sql_execute(sql,sql_zone=None,sql_position=None)
+    print(result_dict[0])
+    print(result_dict[1])
 
