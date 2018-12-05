@@ -117,7 +117,7 @@ class db_redshift():
         for i,sql in enumerate(execut_sql_for_redshift_list):
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
-            _,result = self.redshift_execute(change_sql)
+            result = self.result_df(change_sql)
             result_dict[i] = result
 
         return result_dict
