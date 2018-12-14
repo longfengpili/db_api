@@ -52,7 +52,7 @@ class db_redshift():
             execut_sql_for_redshift_list = find_sql_for_redshift_list
         elif isinstance(sql_position,int):
             # print(find_sql_for_redshift_list)
-            execut_sql_for_redshift_list = [[sql_split for sql in find_sql_for_redshift_list for sql_split in sql.split(';') if sql_split.strip()][sql_position]]
+            execut_sql_for_redshift_list = [[sql_split.strip() for sql in find_sql_for_redshift_list for sql_split in sql.split(';') if sql_split.strip()][sql_position]]
             # execut_sql_for_redshift_list = [[i for i in find_sql_for_redshift_list[0].split(';') if i.strip()][sql_position]]
         elif not isinstance(sql_position,int):
             raise 'sql_position must be a int or none!'

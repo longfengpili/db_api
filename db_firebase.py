@@ -51,10 +51,10 @@ class db_firebase():
         if sql_position == None:
             execut_sql_for_firebase_list = []
             for sql in find_sql_for_firebase_list:
-                sql = [i for i in sql.split(';') if i.strip()]
+                sql = [i.strip() for i in sql.split(';') if i.strip()]
                 execut_sql_for_firebase_list.append(sql)
         elif isinstance(sql_position,int):
-            execut_sql_for_firebase_list = [[sql_spilt for sql in find_sql_for_firebase_list for sql_spilt in sql.split(';') if sql_spilt.strip()][sql_position]]
+            execut_sql_for_firebase_list = [[sql_spilt.strip() for sql in find_sql_for_firebase_list for sql_spilt in sql.split(';') if sql_spilt.strip()][sql_position]]
                 
             # execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][sql_position]]]
 
