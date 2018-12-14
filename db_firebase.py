@@ -54,7 +54,7 @@ class db_firebase():
                 sql = [i for i in sql.split(';') if i.strip()]
                 execut_sql_for_firebase_list.append(sql)
         elif isinstance(sql_position,int):
-            execut_sql_for_firebase_list = [[[sql_spilt for sql in find_sql_for_firebase_list for sql_spilt in sql.split(';') if sql_spilt.strip()][sql_position]]]
+            execut_sql_for_firebase_list = [[sql_spilt for sql in find_sql_for_firebase_list for sql_spilt in sql.split(';') if sql_spilt.strip()][sql_position]]
                 
             # execut_sql_for_firebase_list = [[[i for i in find_sql_for_firebase_list[0].split(';') if i.strip()][sql_position]]]
 
@@ -122,16 +122,17 @@ class db_firebase():
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
-            try:
-                tablename = re.findall('create table `(.*?)` as',sql)[0]
-            except:
-                tablename = None
+            # try:
+            #     tablename = re.findall('create table `(.*?)` as',sql)[0]
+            # except:
+            #     tablename = None
 
-            if tablename:
-                self.__drop_table(tablename)
-                self.firebase_execute(change_sql)
-            else:
-                _,result = self.firebase_execute(change_sql)
+            # if tablename:
+            #     self.__drop_table(tablename)
+            #     self.firebase_execute(change_sql)
+            # else:
+            #     _,result = self.firebase_execute(change_sql)
+            _,result = self.firebase_execute(change_sql)
         return result
 
     def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
