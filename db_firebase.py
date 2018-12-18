@@ -108,6 +108,16 @@ class db_firebase():
             logging.error(e)
         return df
 
+    def result_todf(self,result):
+        values = []
+        columns = (result[0].keys())
+        for row in result:
+            values.append(row.values())
+        
+        result = DataFrame(values,columns=columns)
+        return result
+
+
     def __drop_table(self,tablename):
         try:
             dataset_id,table_id = tablename.split('.',2)
@@ -123,7 +133,7 @@ class db_firebase():
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
             # try:
-            #     tablename = re.findall('create table `(.*?)` as',sql)[0]
+            #     tablename = re.findall('create table `(temp.*?)` as',sql)[0]
             # except:
             #     tablename = None
 
@@ -135,7 +145,7 @@ class db_firebase():
             _,result = self.firebase_execute(change_sql)
         return result
 
-    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
+    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,df=True,**kw):
         result_dict = {}
         sql_for_firebase_list = self.__find_sql_for_fire(sql,sql_zone=sql_zone)
         # logging.warning(sql_for_firebase_list)
@@ -145,6 +155,9 @@ class db_firebase():
         for sqllist in execut_sql_for_firebase_list:
             # logging.info(sqllist)
             result = self.firebase_execute_sqllist(sqllist,**kw)
+            if df:
+                result = self.result_todf(result)
+                
             result_dict[j] = result
             j += 1
             

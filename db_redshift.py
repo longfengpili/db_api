@@ -109,7 +109,7 @@ class db_redshift():
 
         return df
     
-    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,**kw):
+    def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,df=True,**kw):
         sql_for_redshift_list = self.__find_sql_for_red(sql,sql_zone=sql_zone)
         execut_sql_for_redshift_list = self.__execut_sql_for_red(sql_for_redshift_list,sql_position=sql_position)
         result_dict = {}
@@ -117,7 +117,10 @@ class db_redshift():
         for i,sql in enumerate(execut_sql_for_redshift_list):
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
-            _,result = self.redshift_execute(change_sql)
+            if df:
+                result = self.result_df(change_sql)
+            else:
+                _,result = self.redshift_execute(change_sql)
             result_dict[i] = result
 
         return result_dict
