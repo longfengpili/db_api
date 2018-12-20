@@ -110,7 +110,7 @@ class db_firebase():
 
     def result_todf(self,result):
         values = []
-        columns = (result[0].keys())
+        columns = list(result[0].keys())
         for row in result:
             values.append(row.values())
         
@@ -132,17 +132,17 @@ class db_firebase():
         for sql in sqllist:
             change_sql = self.change_sql(sql,**kw)
             logging.info(change_sql)
-            # try:
-            #     tablename = re.findall('create table `(temp.*?)` as',sql)[0]
-            # except:
-            #     tablename = None
+            try:
+                tablename = re.findall('create table `(temp.*?)` as',sql)[0]
+            except:
+                tablename = None
 
-            # if tablename:
-            #     self.__drop_table(tablename)
-            #     self.firebase_execute(change_sql)
-            # else:
-            #     _,result = self.firebase_execute(change_sql)
-            _,result = self.firebase_execute(change_sql)
+            if tablename:
+                self.__drop_table(tablename)
+                self.firebase_execute(change_sql)
+            else:
+                _,result = self.firebase_execute(change_sql)
+            # _,result = self.firebase_execute(change_sql)
         return result
 
     def multiple_sql_execute(self,sql,sql_zone=None,sql_position=None,df=True,**kw):
