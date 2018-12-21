@@ -125,6 +125,13 @@ class db_redshift():
 
         return result_dict
 
+    def get_table_columns(self,tablename):
+        sql = f'select * from {tablename} limit 1;'
+        result = self.result_df(sql)
+        columns = list(result.columns.values)
+        columns = ','.join(columns)
+        return columns
+
 
 if __name__ == '__main__':
     redshift = db_redshift(database='',user='',password='',host='',port='5439')

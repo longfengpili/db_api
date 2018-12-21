@@ -163,6 +163,13 @@ class db_firebase():
             
         return result_dict
 
+    def get_table_columns(self,tablename):
+        sql = f'select * from `{tablename}` limit 1;'
+        _,result = self.firebase_execute(sql)
+        columns = list(result[0].keys())
+        columns = ','.join(columns)
+        return columns
+
 
 if __name__ == '__main__':
     firebase = db_firebase(secret_json_path='../wordconnect_secret.json',project='word-view')
