@@ -1,3 +1,12 @@
+'''
+@Author: longfengpili
+@coding: 
+#!/usr/bin/env python
+# -*- coding:utf-8 -*-
+@github: https://github.com/longfengpili
+@Date: 2019-01-18 20:54:53
+@LastEditTime: 2019-03-04 15:41:29
+'''
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
@@ -71,9 +80,9 @@ class db_redshift():
                 sql = re.sub('\{}(?!\w)'.format(i),"{}".format(dict[i]),sql)
             else:
                 sql = re.sub('\{}(?!\w)'.format(i),"\'{}\'".format(dict[i]),sql)
-        sql = re.sub('\$.*?,','null,',sql)
-        sql = re.sub('\$.*?\)','null)',sql)
-        sql = re.sub('\$.*? ','null ',sql)
+        # sql = re.sub('\$.*?,','null,',sql)
+        # sql = re.sub('\$.*?\)','null)',sql)
+        # sql = re.sub('\$.*? ','null ',sql)
 
         return sql
 
